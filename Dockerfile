@@ -1,12 +1,11 @@
-FROM python:3.10-slim-buster
+FROM python:3.10
 
-WORKDIR /src
+WORKDIR /app
 
-COPY ./app/requirements.txt requirements.txt
+COPY . /app
 
-RUN pip install -r requirements.txt
+RUN pip install --trusted-host pypi.python.org -r requirements.txt
 
-COPY ./app .
+EXPOSE 80
 
-CMD python app.py
-
+CMD ["python", "app.py"]
