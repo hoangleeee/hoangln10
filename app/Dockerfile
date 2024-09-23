@@ -1,5 +1,9 @@
 FROM python:3.10-slim-buster
 
+COPY /app
+
+WORKDIR /app
+
 RUN apt update
 
 RUN apt install build-essential libpq-dev -y
