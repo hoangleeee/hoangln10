@@ -4,7 +4,13 @@ WORKDIR /app
 
 COPY . /app
 
-RUN pip install --trusted-host pypi.python.org -r requirements.txt
+RUN apt update
+
+RUN apt install build-essential libpq-dev -y
+
+RUN pip install --upgrade pip setuptools wheel
+
+RUN pip install -r requirements.txt
 
 EXPOSE 80
 
