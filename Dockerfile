@@ -1,16 +1,17 @@
-FROM python:3.10
+FROM python:3.10-slim-buster
+
+COPY /app
 
 WORKDIR /app
 
-COPY . /app
+RUN apt update
 
-# Dependencies required for psycopg2 (used for Postgres client)
-RUN apt update -y && apt install -y build-essential libpq-dev
+RUN apt install build-essential libpq-dev -y
 
-# Dependencies are installed during build time in the container itself so we don't have OS mismatch
+RUN pip install --upgrade pip setuptools wheel
+
 RUN pip install -r requirements.txt
 
-
-EXPOSE 80
+EXPOSE 5153
 
 CMD ["python", "app.py"]
